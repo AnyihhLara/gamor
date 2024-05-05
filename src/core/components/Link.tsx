@@ -2,20 +2,18 @@ type Props = {
   title: string;
   link: string;
   active?: boolean;
-  button?: boolean;
-  mainboard?: boolean;
+ variant?:string;
 };
 export default function Link({
   title,
   link,
   active,
-  button,
-  mainboard,
+ variant
 }: Props) {
   let className: string = "";
 
-  switch (true) {
-    case button:
+  switch (variant) {
+    case "button":
       className = `${
         active
           ? "text-white/80 border border-gray-800 rounded-full px-4 py-3 bg-gray-950/95"
@@ -23,7 +21,7 @@ export default function Link({
       } text-black dark:text-white/80 
       `;
       break;
-    case mainboard:
+    case "mainboard":
       className = `${
         active
           ? "rounded-3xl px-2 py-2 sm:py-2 sm:px-3 md:py-3 lg:px-5 lg:py-4 bg-white dark:bg-gray-500/30 shadow-lg dark:shadow-xl"

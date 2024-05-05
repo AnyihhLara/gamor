@@ -1,3 +1,4 @@
+import { SignedOut } from "@clerk/clerk-react";
 import Link from "../Link";
 
 export default function MainBoardLeftCard() {
@@ -15,15 +16,24 @@ export default function MainBoardLeftCard() {
 
       <span className="text-xs font-bold text-gray-800 dark:text-gray-500 text-left">
         gamor now has{" "}
-        <span className="text-black dark:text-white">
-          stream party{" "}
-        </span>
+        <span className="text-black dark:text-white">stream party </span>
         platform
       </span>
-      <div className="flex items-center space-x-6">
-        <Link title="Create account" link="/" mainboard={true} active={true} />
-        <Link title="Sign in" link="/" mainboard={true} />
-      </div>
+      <SignedOut>
+        <div className="flex items-center space-x-6">
+          <Link
+            title="Create account"
+            link="https://mighty-panther-60.accounts.dev/sign-up"
+            variant="mainboard"
+            active
+          />
+          <Link
+            title="Sign in"
+            link="https://mighty-panther-60.accounts.dev/sign-in"
+            variant="mainboard"
+          />
+        </div>
+      </SignedOut>
     </div>
   );
 }
