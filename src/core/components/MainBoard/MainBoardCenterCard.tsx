@@ -23,7 +23,7 @@ export default function MainBoardCenterCard() {
       </div>
 
       <div>
-        <img src="/public/man-fornite-dark.png" alt="man-fornite" className="w-80 h-80 mt-2" />
+        <img src="./man-fornite-dark.png" alt="man-fornite" className="w-80 h-80 mt-2" />
       </div>
     </div>
   );

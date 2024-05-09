@@ -1,70 +1,58 @@
-// Si estás utilizando Vite con React y TypeScript, puedes crear un endpoint para obtener un token de acceso siguiendo un enfoque más moderno y basado en TypeScript. Aquí tienes un ejemplo de cómo podrías implementar este endpoint utilizando Vite y el enrutador React-Router:
+const clientId = import.meta.env.VITE_CLIENT_ID;
+const getAccessToken = async () => {
+  const params = new URLSearchParams();
+  params.append("client_id", clientId);
+  params.append("client_secret", import.meta.env.VITE_CLIENT_SECRET);
+  params.append("grant_type", "client_credentials");
+  const response = await fetch("https://id.twitch.tv/oauth2/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: params,
+  });
 
-// Primero, asegúrate de tener instaladas las dependencias necesarias. Puedes instalarlas usando npm o yarn:
-// CSS
-// Copy
-// npm install react-router-dom @types/react-router-dom
-// Luego, puedes crear un componente funcional en tu aplicación React que maneje la lógica para obtener el token de acceso. Aquí hay un ejemplo de cómo podrías hacerlo:
-// JAVASCRIPT
-// Copy
-// import { useEffect } from 'react';
-// import { useLocation } from 'react-router-dom';
+  const data = await response.json();
 
-// const AccessTokenEndpoint = () => {
-//   const { search } = useLocation();
-//   const params = new URLSearchParams(search);
-//   const client_id = params.get('client_id');
-//   const client_secret = params.get('client_secret');
-//   const grant_type = params.get('grant_type');
+  return data.access_token;
+};
 
-//   useEffect(() => {
-//     const fetchAccessToken = async () => {
-//       if (grant_type !== 'client_credentials') {
-//         console.error('grant_type must be client_credentials');
-//         return;
-//       }
+const getGames = async (gameName: string) => {
+  const token = await getAccessToken();
 
-//       // Validar el client_id y client_secret (deberías tener tu propia lógica de validación)
+  const response = await fetch(
+    `https://api.twitch.tv/helix/games?name=${gameName}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        "Client-Id": clientId,
+      },
+    }
+  );
+  const data = await response.json();
+  return data;
+};
+const getUsers = async (gameId: string) => {
+  const token = await getAccessToken();
 
-//       // Generar un token de acceso (puedes usar fetch u otras librerías)
-
-//       // Devolver el token de acceso
-//       const response = await fetch('https://id.twitch.tv/oauth2/token', {
-//         method: 'POST',
-//         body: new URLSearchParams({ client_id, client_secret, grant_type }),
-//         headers: {
-//           'Content-Type': 'application/x-www-form-urlencoded'
-//         }
-//       });
-//       const data = await response.json();
-//       console.log(data);
-//     };
-
-//     fetchAccessToken();
-//   }, [client_id, client_secret, grant_type]);
-
-//   return null; // No se muestra nada en la interfaz
-// };
-
-// export default AccessTokenEndpoint;
-// En tu archivo de rutas principal, asegúrate de incluir este componente en la ruta correspondiente:
-// JAVASCRIPT
-// Copy
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import AccessTokenEndpoint from './AccessTokenEndpoint';
-
-// const App = () => {
-//   return (
-//     <Router>
-//       <Switch>
-//         <Route path="/oauth2/token">
-//           <AccessTokenEndpoint />
-//         </Route>
-//         {/* Otras rutas de tu aplicación */}
-//       </Switch>
-//     </Router>
-//   );
-// };
-
-// export default App;
-// Este enfoque utiliza React Hooks y el enrutador react-router-dom para manejar la lógica de obtener el token de acceso en un componente funcional. Recuerda adaptar esta implementación a tus necesidades específicas y a la autenticación y generación de tokens de acceso seguros según los requisitos de tu proyecto.
+  const response = await fetch(
+    `https://api.twitch.tv/helix/streams?game_id=${gameId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        "Client-Id": clientId,
+      },
+    }
+  );
+  const data = await response.json();
+  return data;
+};
+export const getGameUsers = async (gameName: string) => {
+  const games = await getGames(gameName);
+  const users = await getUsers(games.data[0].id);
+  return users.data;
+};

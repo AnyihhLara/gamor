@@ -1,12 +1,16 @@
 import { FormEvent, useState } from "react";
 import GamesSearcherSettingsIcon from "./GamesSearcherSettingsIcon";
 import GamesSearcherUserTable from "./GamesSearcherUsersTable";
+import { getGameUsers } from "../../../services/Twitch.ts";
 
 export default function GamesSearcher() {
   const [searchValue, setSearchValue] = useState("");
-  function handleSearchSubmit(e: FormEvent<HTMLFormElement>) {
+  const [users, setUsers] = useState(undefined);
+  async function handleSearchSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     console.log(searchValue);
+    setUsers(await getGameUsers(searchValue));
+    console.log(users)
   }
   return (
     <div className="bg-white dark:bg-gray-950/40 rounded-lg shadow-md p-1.5 w-72">
@@ -30,7 +34,7 @@ export default function GamesSearcher() {
         <hr className="border-slate-50 dark:border-neutral-700/30" />
 
         <div>
-          <GamesSearcherUserTable />
+          <GamesSearcherUserTable users={users} />
           <div className="px-4 pb-2 mt-2">
             <button
               type="submit"
