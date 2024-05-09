@@ -16,7 +16,7 @@ export default function CategoryCard({ title, number, color }: Props) {
         </span>
       </span>
       <div className="flex flex-col justify-start">
-        <h4 className="font-semibold mt-1 mb-3 pl-1.5 dark:text-gray-50">
+        <h4 className="font-semibold mt-1 mb-3 sm:pl-1.5 dark:text-gray-50">
           {title}
         </h4>
         <button>

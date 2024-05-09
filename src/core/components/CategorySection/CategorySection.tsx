@@ -6,7 +6,7 @@ export default function CategorySection() {
       <h3 className="font-semibold mb-3 text-left text-lg dark:text-gray-50">
         Trending Categories
       </h3>
-      <div className="grid grid-flow-row grid-cols-4 gap-2">
+      <div className="grid grid-flow-row grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
         <CategoryCard
           title="Action Games"
           number="01"

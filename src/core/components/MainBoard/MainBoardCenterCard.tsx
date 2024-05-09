@@ -2,7 +2,7 @@ import UserAvatar from "./components/UserAvatar";
 
 export default function MainBoardCenterCard() {
   return (
-    <div className="flex flex-col justify-start items-center px-16 bg-violet-600 dark:bg-orange-400 shadow-2xl">
+    <div className="flex flex-col justify-start items-center px-16 bg-violet-600 dark:bg-orange-400 shadow-2xl sm:order-3 sm:col-span-2 lg:order-none lg:col-span-1">
       <div className="mt-10">
         <h2 className="text-white font-bold text-lg">Fornite New Season</h2>
         <span className="text-black/50 dark:text-black/30 font-bold text-sm">
@@ -22,7 +22,9 @@ export default function MainBoardCenterCard() {
         </div>
       </div>
 
-      <div>z</div>
+      <div>
+        <img src="/public/man-fornite-dark.png" alt="man-fornite" className="w-80 h-80 mt-2" />
+      </div>
     </div>
   );
 }

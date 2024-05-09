@@ -2,14 +2,9 @@ type Props = {
   title: string;
   link: string;
   active?: boolean;
- variant?:string;
+  variant?: string;
 };
-export default function Link({
-  title,
-  link,
-  active,
- variant
-}: Props) {
+export default function Link({ title, link, active, variant }: Props) {
   let className: string = "";
 
   switch (variant) {
@@ -29,9 +24,12 @@ export default function Link({
       } text-black dark:text-white dark:hover:text-orange-400 dark:active:text-violet-800 hover:text-violet-800 active:text-orange-400
       `;
       break;
+    case "menu":
+      className = "dark:text-black/90 text-white/90";
+      break;
     default:
-      className = `${active ? "text-violet-800" : "text-neutral-600"} ${
-        active ? "dark:text-orange-400" : "dark:text-neutral-600"
+      className = `${
+        active ? "text-violet-800 dark:text-orange-400" : "text-neutral-600"
       }`;
       break;
   }
