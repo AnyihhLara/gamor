@@ -29,7 +29,7 @@ export default function PlatformItem({
 
   return (
     <div
-      className={`${divClass} cursor-pointer px-5 rounded-3xl py-2`}
+      className={`${divClass} cursor-pointer px-5 rounded-3xl py-2 w-full`}
       onClick={onCheck}
     >
       <label

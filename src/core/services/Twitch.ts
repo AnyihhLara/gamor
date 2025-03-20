@@ -53,6 +53,10 @@ const getUsers = async (gameId: string) => {
 };
 export const getGameUsers = async (gameName: string) => {
   const games = await getGames(gameName);
-  const users = await getUsers(games.data[0].id);
-  return users.data;
+  if (games && games.data[0]) {
+    const users = await getUsers(games.data[0].id);
+    return users.data;
+  } else {
+    return [];
+  }
 };

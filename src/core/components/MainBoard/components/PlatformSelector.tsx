@@ -4,7 +4,7 @@ import PlatformItem from "./PlatformItem";
 export default function PlatformSelector() {
   const [checkedPlatform, setCheckedPlatform] = useState("Party");
   return (
-    <div className="flex gap-1 rounded-full shadow-sm bg-white dark:bg-gray-950/40 p-1.5 w-72">
+    <div className="flex gap-1 rounded-full shadow-sm bg-white dark:bg-gray-950/40 p-1.5 w-80 md:w-72">
       <PlatformItem
         title="Party"
         name="platform"
