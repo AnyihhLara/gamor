@@ -19,7 +19,7 @@ export default function Link({ title, link, active, variant }: Props) {
     case "mainboard":
       className = `${
         active
-          ? "rounded-3xl px-2 py-2 sm:py-2 sm:px-3 md:py-3 lg:px-5 lg:py-4 bg-white dark:bg-gray-500/30 shadow-lg dark:shadow-xl"
+          ? "rounded-3xl px-3 py-3 lg:px-5 lg:py-4 bg-white dark:bg-gray-500/30 shadow-lg dark:shadow-xl"
           : ""
       } text-black dark:text-white dark:hover:text-orange-400 dark:active:text-violet-800 hover:text-violet-800 active:text-orange-400
       `;
